@@ -8,6 +8,8 @@
 
 Proyecto universitario de Diseño de Aplicaciones Avanzadas: Un sistema de Punto de Venta (POS) desarrollado usando la metodología **Spec-Driven Development (SDD)** y **Arquitectura Hexagonal (Puertos y Adaptadores)**.
 
+![Pantalla de Inicio](screenshots/home.png)
+
 ## 📂 Estructura del Proyecto
 
 El repositorio está dividido en dos partes principales, ambas siguiendo principios SOLID y Arquitectura Limpia:
@@ -20,6 +22,8 @@ El repositorio está dividido en dos partes principales, ambas siguiendo princip
 ---
 
 ## ✨ Características del Frontend
+
+![Terminal POS](screenshots/cajero.png)
 
 - **Búsqueda Dinámica (Fuzzy Search):** La cuadrícula de productos no se muestra por defecto. Los productos solo aparecen en tiempo real mientras el cajero escribe el nombre o escanea el código de barras.
 - **Carrito de Compras:** Cálculo en tiempo real del subtotal, IVA (19%) y total.
