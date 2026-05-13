@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
 import './app/globals.css';
 import SalePage from './app/(pos)/sale/page';
-import { AdminDashboard } from './components/admin/AdminDashboard';
 
 function App() {
-  const [session, setSession] = useState<{ started: boolean; role: 'admin' | 'cashier' | null }>({
-    started: false,
-    role: null
+  const [session, setSession] = useState<{ started: boolean }>({
+    started: false
   });
 
-  const startSession = (role: 'admin' | 'cashier') => {
-    setSession({ started: true, role });
+  const startSession = () => {
+    setSession({ started: true });
   };
 
   if (session.started) {
@@ -21,22 +19,18 @@ function App() {
             <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center font-black">P</div>
             <span className="font-bold tracking-tight">POS Sebastian</span>
             <span className="ml-4 px-2 py-0.5 bg-slate-800 rounded text-[10px] font-bold uppercase text-blue-400 border border-blue-400/30">
-              {session.role === 'admin' ? 'Modo Administrador' : 'Modo Cajero'}
+              Modo Cajero
             </span>
           </div>
           <button 
-            onClick={() => setSession({ started: false, role: null })}
+            onClick={() => setSession({ started: false })}
             className="text-xs font-bold text-slate-400 hover:text-white transition-colors"
           >
             Cerrar Sesión
           </button>
         </header>
         <div className="flex-1 overflow-hidden">
-          {session.role === 'admin' ? (
-            <AdminDashboard />
-          ) : (
-            <SalePage />
-          )}
+          <SalePage />
         </div>
       </div>
     );
@@ -57,16 +51,10 @@ function App() {
         
         <div className="flex flex-col sm:flex-row gap-6 w-full max-w-md">
           <button
-            onClick={() => startSession('cashier')}
-            className="flex-1 py-5 bg-slate-900 dark:bg-white dark:text-black text-white rounded-2xl font-black text-lg hover:scale-[1.02] transition-all shadow-xl active:scale-95"
+            onClick={() => startSession()}
+            className="flex-1 py-5 bg-slate-900 dark:bg-white dark:text-black text-white rounded-2xl font-black text-lg hover:scale-[1.02] transition-all shadow-xl active:scale-95 w-full"
           >
-            Terminal POS
-          </button>
-          <button
-            onClick={() => startSession('admin')}
-            className="flex-1 py-5 bg-white dark:bg-slate-800 text-slate-900 dark:text-white border-2 border-slate-200 dark:border-slate-700 rounded-2xl font-black text-lg hover:border-blue-600 transition-all active:scale-95"
-          >
-            Admin Panel
+            Abrir Terminal POS
           </button>
         </div>
         

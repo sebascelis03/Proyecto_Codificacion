@@ -1,0 +1,32 @@
+Please act as Kiro and design a comprehensive Spring Boot REST API for a Supermarket Point of Sale (POS) system. This Sales API will manage the entire transaction lifecycle at the checkout terminal.
+
+Context & Dependencies:
+Our system interacts with two existing external services:
+1. Product API: For retrieving product details and managing stock.
+2. Customer API: For retrieving customer records and verifying credit status.
+Our API must call these via HTTP (RestTemplate/WebClient) and handle unavailability gracefully (e.g., returning 503 Service Unavailable).
+
+Core Features Required:
+1. Product & Customer Search:
+   - Provide endpoints to search products by name (partial) or barcode.
+   - Provide endpoints to search customers by name (partial) or document number (exact).
+2. Sale Lifecycle Management:
+   - States: ACTIVE, COMPLETED, CANCELLED, FROZEN, RETURNED, PARTIALLY_RETURNED.
+   - Create a sale (linked to a POS terminal and cashier).
+   - Add/update/remove items (validate stock >= quantity).
+   - Freeze an ACTIVE sale to hold it, and resume it later. Frozen sales expire after 2 hours.
+   - Cancel an ACTIVE or FROZEN sale (requires a reason).
+3. Payment Processing & Checkout:
+   - Support CASH (requires received amount, calculates change) and CREDIT (requires customer with APPROVED credit status).
+   - Checkout validates everything, decrements stock via Product API, and generates a receipt. Returns 409 Conflict if stock ran out.
+4. Returns:
+   - Full return: restores all stock, changes state to RETURNED.
+   - Partial return: restores stock for specific items, changes state to PARTIALLY_RETURNED.
+   - Requires a reason, references the original transaction, and cannot exceed original quantities.
+5. Calculations:
+   - Use BigDecimal for all money values (subtotal, tax at 19%, discount, total) to avoid precision errors.
+
+Technical Requirements:
+- Java 17+, Spring Boot 3.x, H2 database (PostgreSQL schema).
+- Spring Data JPA, Jakarta Validation, SpringDoc OpenAPI.
+- Testing: JUnit 5, Mockito for units, @SpringBootTest with WireMock for integration. Must achieve >=80% JaCoCo coverage.

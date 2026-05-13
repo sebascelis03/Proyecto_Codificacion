@@ -1,10 +1,10 @@
 'use client';
 
 import React from 'react';
-import { ProductGrid } from '../../../components/pos/ProductGrid/ProductGrid';
-import { CartPanel } from '../../../components/pos/CartPanel/CartPanel';
-import { useCartStore } from '../../../stores/cartStore';
-import { Product } from '../../../domain/entities/Product';
+import { ProductGrid } from '../../../features/pos/ProductGrid/ProductGrid';
+import { CartPanel } from '../../../features/pos/CartPanel/CartPanel';
+import { useCartStore } from '../../../adapters/state/cartStore';
+import { Product } from '../../../core/entities/Product';
 
 export default function SalePage() {
   const { actions } = useCartStore();
